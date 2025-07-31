@@ -13,7 +13,7 @@ declare module 'say' {
     (error?: Error | null, voices?: string[]): void;
   }
 
-  export function speak(text: string, voice?: string | null, speed?: number, callback?: SayCallback): any;
+  export function speak(text: string, voice?: string | null, speed?: number, callback?: SayCallback): unknown;
   export function stop(): void;
   export function getInstalledVoices(callback: VoicesCallback): void;
 }

@@ -151,8 +151,8 @@ export class CopilotIntegration implements ICopilotIntegration {
   private simulateSuggestionStream(): void {
     if (!this.listening) return;
 
-    // Simulate periodic suggestions
-    setTimeout(() => {
+    // Use unref to prevent keeping the process alive during tests
+    const timeout = setTimeout(() => {
       if (this.listening) {
         const suggestion: CopilotSuggestion = {
           text: 'function calculateSum(a, b) { return a + b; }',
@@ -168,7 +168,10 @@ export class CopilotIntegration implements ICopilotIntegration {
         this.notifySuggestionListeners(suggestion);
         this.simulateSuggestionStream();
       }
-    }, 5000); // Simulate suggestion every 5 seconds
+    }, 5000);
+    
+    // Prevent timeout from keeping process alive in tests
+    timeout.unref();
   }
 
   /**

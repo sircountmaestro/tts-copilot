@@ -189,6 +189,9 @@ describe('TTSEngine', () => {
 
   describe('stop', () => {
     it('should stop current speech', () => {
+      // Set up a mock current process first
+      ttsEngine['currentProcess'] = { mock: 'process' };
+      
       ttsEngine.stop();
       expect(say.stop).toHaveBeenCalled();
     });
